@@ -18,20 +18,24 @@ def login(user: str, password: str) -> bool:
     return False
 
 #Função para redefinir a senha
-def resetPassword(user: str, new_password: str) -> str:
+def resetPassword(user: str, password: str, new_password: str) -> str:
     '''
     Função para redefinir a senha do usuário.
 
     Parâmetros:
         - user (str): nome do usuário
+        - password (str): senha do usuário
         - new_password (str): senha atualizada para registrar
     
     Retorno: Uma String confirmando ou recusando a modificação da senha
     '''
-    if user in db:
+    if login(user, password):
         db[user] = new_password
         return 'Senha Alterada!'
     
-    return 'Usuário Não Cadastrado!'
+    return 'Error: Credenciais Inválidas!'
+
+#Função para modificar o nome do usuário
+def updateUser(user: str, password: str) -> object:
 
 
