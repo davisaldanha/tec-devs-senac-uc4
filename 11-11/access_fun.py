@@ -1,4 +1,5 @@
 from database import db_users as db
+from datetime import datetime as dt
 
 #Função para realizar o login
 def login(user: str, password: str) -> bool:
@@ -36,6 +37,24 @@ def resetPassword(user: str, password: str, new_password: str) -> str:
     return 'Error: Credenciais Inválidas!'
 
 #Função para modificar o nome do usuário
-def updateUser(user: str, password: str) -> object:
+def updateUser(user: str, password: str, new_user: str) -> str:
+    '''
+    Função para modificar o nome do usuário.
+
+    Parâmetros:
+        - user (str): nome do usuário
+        - password (str): senha do usuário
+        - new_user (str): novo nome do usuário
+    
+    Retorno: Confirmação da modificação do usuário. 
+            Caso seja disparado algum erro será gerado um log.
+    '''
+    try:
+        if login(user, password):
+            db[new_user] = db.pop(user)
+            return 'Usuário atualizado com sucesso!'
+    except:
+        print(f'log:[{dt.date}] - [{dt.time}]: Error no Servidor!')
+
 
 
