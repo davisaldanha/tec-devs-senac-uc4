@@ -1,6 +1,10 @@
 import pandas as pd
+from pathlib import Path
 
-df = pd.read_json('./users.json', encoding='utf-8')
+BASE_PATH = Path(__file__).parent.resolve()
+DIR_PATH = BASE_PATH / 'users.json'
+
+df = pd.read_json(DIR_PATH, encoding='utf-8')
 
 #CRUD -> CREATE, READ, UPDATE, DELETE
 def insert_user(user, password):
