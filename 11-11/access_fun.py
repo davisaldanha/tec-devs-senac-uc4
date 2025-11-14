@@ -1,5 +1,5 @@
-from database import db_users as db
 from datetime import datetime as dt
+from access_file_user import *
 
 #Função para realizar o login
 def login(user: str, password: str) -> bool:
@@ -12,9 +12,9 @@ def login(user: str, password: str) -> bool:
     
     Retorno: retornará um valor true ou false
     '''
-    for k, v in db.items():
-        if k == user and v == password:
-            return True
+    df = find_by_user(user)
+    if df.iloc[0, 2] == password:
+        return True
     
     return False
 
@@ -55,6 +55,3 @@ def updateUser(user: str, password: str, new_user: str) -> str:
             return 'Usuário atualizado com sucesso!'
     except:
         print(f'log:[{dt.date}] - [{dt.time}]: Error no Servidor!')
-
-
-
